@@ -147,7 +147,7 @@ The seed file contains fictional demo users. Their password is:
 
 Example:
 
-`ananya@wastenot.demo`
+`divya@wastenot.demo`
 
 ## Environment variables
 

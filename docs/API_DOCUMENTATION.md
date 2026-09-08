@@ -64,7 +64,7 @@ Errors: `400` validation, `409` duplicate email, `500` unexpected error.
 Request:
 
 ```json
-{ "email": "ananya@wastenot.demo", "password": "demo123" }
+{ "email": "divya@wastenot.demo", "password": "demo123" }
 ```
 
 Success `200` returns a signed bearer token and safe user information.
