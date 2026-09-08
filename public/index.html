@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WasteNot — Food Surplus Redistribution</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status"></div>
+
+  <section id="authView" class="auth-shell">
+    <div class="auth-card">
+      <div class="brand-mark">WN</div>
+      <p class="eyebrow">FOOD SURPLUS REDISTRIBUTION</p>
+      <h1>WasteNot</h1>
+      <p class="muted">Turn edible surplus into someone's next meal.</p>
+
+      <div class="auth-tabs">
+        <button class="tab active" data-auth-tab="login">Login</button>
+        <button class="tab" data-auth-tab="register">Register</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+        <label>Password<input type="password" name="password" placeholder="••••••••" required></label>
+        <button class="primary full" type="submit">Login</button>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <label>Name<input type="text" name="name" maxlength="100" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <label>Password<input type="password" name="password" minlength="6" required></label>
+        <label>Location<input type="text" name="location" placeholder="Chennai" maxlength="120" required></label>
+        <button class="primary full" type="submit">Create account</button>
+      </form>
+
+      <p class="demo-note">Demo login: <strong>ananya@wastenot.demo</strong> / <strong>demo123</strong></p>
+    </div>
+  </section>
+
+  <div id="appView" class="app hidden">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark small">WN</span><span>WasteNot</span></div>
+      <nav>
+        <button data-section="dashboard" class="nav-link active">Dashboard</button>
+        <button data-section="find" class="nav-link">Find Food</button>
+        <button data-section="add" class="nav-link">Add Surplus</button>
+        <button data-section="mine" class="nav-link">My Surplus</button>
+        <button data-section="claims" class="nav-link">Claims</button>
+      </nav>
+      <div class="account"><span id="userName"></span><button id="logoutBtn" class="ghost">Logout</button></div>
+    </header>
+
+    <main class="container">
+      <section id="dashboard" class="page-section active-section">
+        <div class="page-head"><div><p class="eyebrow">YOUR IMPACT</p><h2>Dashboard</h2><p class="muted">A live view of food being kept out of waste streams.</p></div><button class="secondary" data-section="add">+ Add surplus</button></div>
+        <div class="stat-grid">
+          <article class="stat-card"><span>Total listings</span><strong id="totalListings">—</strong></article>
+          <article class="stat-card"><span>Available now</span><strong id="availableListings">—</strong></article>
+          <article class="stat-card"><span>Claimed</span><strong id="claimedListings">—</strong></article>
+          <article class="stat-card"><span>Redistributed</span><strong id="redistributedListings">—</strong></article>
+        </div>
+        <article class="impact-card"><div><p class="eyebrow">FOOD WASTE PREVENTED</p><h3><span id="foodWastePrevented">0</span> <small>units</small></h3><p class="muted">Sum of quantities from successfully completed claims and redistributions.</p></div><div class="impact-icon">↗</div></article>
+      </section>
+
+      <section id="find" class="page-section">
+        <div class="page-head"><div><p class="eyebrow">DISCOVER</p><h2>Find Food</h2><p class="muted">Available surplus from people in your community.</p></div></div>
+        <div class="filter-row"><input id="findLocation" placeholder="Filter by location"><select id="findCategory"><option value="">All categories</option><option>Cooked Food</option><option>Groceries</option><option>Bakery</option><option>Fruits & Vegetables</option><option>Beverages</option><option>Other</option></select><button id="findBtn" class="secondary">Apply filters</button></div>
+        <div id="foodGrid" class="card-grid"></div>
+      </section>
+
+      <section id="add" class="page-section">
+        <div class="page-head"><div><p class="eyebrow">CONTRIBUTE</p><h2 id="formTitle">Add Surplus Food</h2><p class="muted">List safe edible food before its availability deadline.</p></div></div>
+        <form id="surplusForm" class="panel form-grid">
+          <input type="hidden" name="id">
+          <label>Food name<input name="food_name" maxlength="150" required></label>
+          <label>Category<select name="category" required><option value="">Choose category</option><option>Cooked Food</option><option>Groceries</option><option>Bakery</option><option>Fruits & Vegetables</option><option>Beverages</option><option>Other</option></select></label>
+          <label>Quantity<input type="number" name="quantity" min="0.01" step="0.01" required></label>
+          <label>Unit<input name="unit" placeholder="kg, portions, loaves" maxlength="30" required></label>
+          <label>Available until<input type="datetime-local" name="available_until" required></label>
+          <label>Location<input name="location" maxlength="120" required></label>
+          <label class="full-field">Description<textarea name="description" rows="4" maxlength="1000" placeholder="Any useful information about the food..."></textarea></label>
+          <div class="full-field actions"><button type="submit" class="primary" id="saveSurplusBtn">Publish surplus</button><button type="button" class="ghost hidden" id="cancelEditBtn">Cancel edit</button></div>
+        </form>
+      </section>
+
+      <section id="mine" class="page-section">
+        <div class="page-head"><div><p class="eyebrow">MANAGE</p><h2>My Surplus</h2><p class="muted">Create, read, update and delete your own eligible listings.</p></div></div>
+        <div id="myFoodGrid" class="card-grid"></div>
+      </section>
+
+      <section id="claims" class="page-section">
+        <div class="page-head"><div><p class="eyebrow">ACTIVITY</p><h2>Claims</h2><p class="muted">Food you claimed and food others claimed from your listings.</p></div></div>
+        <div id="claimsList" class="claims-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="claimModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal">×</button>
+      <p class="eyebrow">COMPLETE ACTION</p><h2 id="modalTitle">Claim food</h2><p id="modalSubtitle" class="muted"></p>
+      <form id="claimForm">
+        <input type="hidden" name="surplus_id"><input type="hidden" name="claim_type">
+        <label>Quantity<input name="quantity" type="number" min="0.01" step="0.01" required></label>
+        <div id="orgPicker" class="hidden"><label>Matching organization<select name="organization_id" id="organizationSelect" required></select></label><p class="field-help">Only organizations in the same stored location are offered.</p></div>
+        <button class="primary full" type="submit" id="claimSubmit">Confirm</button>
+      </form>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>
