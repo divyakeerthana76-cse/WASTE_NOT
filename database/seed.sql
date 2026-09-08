@@ -2,7 +2,7 @@
 -- The bcrypt hash is intentionally the same because the sample password is the same.
 
 INSERT INTO users (name, email, password, location) VALUES
-('Ananya Rao', 'ananya@wastenot.demo', '$2b$10$CclvhG085t0v8nd0Ba7Bh.MTO23M88lnn5y4CgkeZFAI3JqUGqPH.', 'Chennai'),
+('Divya Keerthana', 'divya@wastenot.demo', '$2b$10$CclvhG085t0v8nd0Ba7Bh.MTO23M88lnn5y4CgkeZFAI3JqUGqPH.', 'Chennai'),
 ('Karthik Kumar', 'karthik@wastenot.demo', '$2b$10$CclvhG085t0v8nd0Ba7Bh.MTO23M88lnn5y4CgkeZFAI3JqUGqPH.', 'Chennai'),
 ('Meera Shah', 'meera@wastenot.demo', '$2b$10$CclvhG085t0v8nd0Ba7Bh.MTO23M88lnn5y4CgkeZFAI3JqUGqPH.', 'Bengaluru');
 
