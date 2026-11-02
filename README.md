@@ -1,118 +1,227 @@
-# WasteNot — Food Surplus Redistribution Platform
+# WasteNot – Food Surplus Redistribution Platform
 
-WasteNot is a full-stack Cloud Computing project that helps people redistribute safe edible surplus food instead of wasting it. A user can publish surplus food, another user can claim it for personal use, or it can be redistributed to a registered organization in the same stored locality.
+WasteNot is a full-stack web application that helps reduce food waste by connecting food donors, individuals, and registered organisations. Users can publish surplus food, claim available food for personal use, or redistribute it to eligible organisations.
 
+This repository contains the implementation of **Digital Assignment 3 (DA3) – Cloud Infrastructure and Architecture** for the WasteNot platform.
 
-# 🚀 DIGITAL ASSIGNMENT 3 – CLOUD INFRASTRUCTURE & SECURITY
+---
 
-This repository includes the implementation of **Digital Assignment 3 (DA3)** for the WasteNot – Food Surplus Redistribution Platform.
+## Digital Assignment 3 – Cloud Infrastructure and Security
 
-### DA3 – Implementation Highlights
+DA3 extends the WasteNot application with cloud scalability, availability, authentication, authorisation, and container security features.
 
-- **Q1 – Cloud Scaling:** Docker-based deployment with three backend instances and Nginx load balancing.
-- **Q1 – Performance Testing:** Load testing, request distribution and failure recovery.
-- **Q2(a) – Password Security:** bcrypt password hashing.
-- **Q2(b) – Authentication & Authorization:** Multi-Factor Authentication (MFA) and Role-Based Access Control (RBAC).
-- **Q2(c) – Container Security:** Docker image hardening and Trivy vulnerability scanning.
+### Implementation Highlights
 
-### 📂 DA3 Submission Links
+**Q1 – Scale Your Application**
+- Docker-based deployment with three backend instances.
+- Nginx load balancing across the backend instances.
+- Connection to the existing Supabase PostgreSQL database.
+- Request distribution testing across the three instances.
+- Performance comparison between one and three backend instances using Autocannon.
+- Failure recovery testing by stopping a backend instance and configuring Nginx retries.
+- Proposed cloud-bursting architecture for handling additional demand.
+
+**Q2 – Secure Your Application**
+- bcrypt password hashing.
+- Multi-Factor Authentication (MFA) using TOTP.
+- Role-Based Access Control (RBAC).
+- Authorisation checks for protected Update and Delete operations.
+- Docker image hardening.
+- Container vulnerability scanning using Trivy.
+- Identification of potential threat agents and discussion of relevant GDPR considerations.
+
+---
+
+## DA3 Submission Links
 
 | Resource | Link |
 |---|---|
 | DA3 Source Code | [Open assignment-3 branch](https://github.com/divyakeerthana76-cse/WASTE_NOT/tree/assignment-3) |
-| Evidence Screenshots | [View Q1 & Q2 Evidence](https://github.com/divyakeerthana76-cse/WASTE_NOT/tree/assignment-3/docs/evidence) |
+| Q1 – Scaling Evidence | [View Q1 screenshots](DA3/Q1_Scaling/) |
+| Q2 – Security Evidence | [View Q2 screenshots](DA3/Q2_Security/) |
+| Architecture Documentation | [View architecture](docs/ARCHITECTURE.md) |
+
+The evidence screenshots are organised by assignment question in the `DA3` directory.
+
+### Evidence Folder Structure
+
+```text
+DA3/
+├── Q1_Scaling/
+│   ├── Q1A_01_Docker_Containers.png
+│   ├── Q1A_02_Database_Connection.png
+│   ├── Q1A_03_Load_Distribution.png
+│   ├── Q1B_01_One_Instance.png
+│   ├── Q1B_02_Three_Instances.png
+│   ├── Q1C_01_Before_Failure.png
+│   ├── Q1C_02_Backend_Stopped.png
+│   ├── Q1C_03_After_Retry.png
+│   └── Q1C_04_Nginx_Retry_Config.png
+│
+└── Q2_Security/
+    ├── Q2A_01_Existing_Password_Hashes.png
+    ├── Q2A_02_Bcrypt_Implementation_01.png
+    ├── Q2A_02_Bcrypt_Implementation._02.png
+    ├── Q2A_03_Upgraded_Password_Hashes.png
+    ├── Q2A_04_Login_Verification.png
+    ├── Q2B_01_MFA_Activation.png
+    ├── Q2B_02_MFA_Implementation.png
+    ├── Q2B_03_MFA_Login_Challenge.png
+    ├── Q2B_04_Invalid_MFA_Rejection.png
+    ├── Q2B_05_Successful_MFA_Login.png
+    ├── Q2B_06_RBAC_Unauthorized_Update.png
+    ├── Q2B_07_RBAC_Unauthorized_Delete.png
+    ├── Q2B_08_RBAC_Admin_Update.png
+    ├── Q2B_09_RBAC_Admin_Delete.png
+    ├── Q2C_01_Before_Hardening.png
+    ├── Q2C_02_After_Hardening_01.png
+    ├── Q2C_02_After_Hardening_02.png
+    ├── Q2C_03_Docker_Image_Size_Comparison.png
+    └── Q2C_04_Hardened_Image_Health_Check.png
+```
 
 ---
 
+## Application Features
 
-## Features
+- User registration, login, and logout.
+- bcrypt password hashing.
+- Surplus food creation, viewing, updating, and deletion.
+- Personal food claiming.
+- Organisation-based food redistribution.
+- Locality-based matching.
+- Food status workflow: `AVAILABLE → CLAIMED / REDISTRIBUTED / EXPIRED`.
+- Backend-side expiry and input validation.
+- PostgreSQL transactions for claims.
+- Dashboard statistics retrieved from PostgreSQL.
+- Food Waste Prevented metric based on completed claim quantities.
+- REST API endpoints.
+- Responsive HTML, CSS, and JavaScript frontend.
+- Supabase PostgreSQL integration.
 
-- User registration, login and logout
-- bcrypt password hashing
-- Surplus food CRUD operations
-- Personal food claiming
-- Organization redistribution
-- Simple city/locality matching
-- AVAILABLE → CLAIMED / REDISTRIBUTED / EXPIRED workflow
-- Backend-enforced expiry and validation
-- PostgreSQL transactions for claims
-- Live dashboard statistics from PostgreSQL
-- Food Waste Prevented metric based on completed claim quantities
-- REST APIs documented for Postman
-- Responsive HTML/CSS/Vanilla JavaScript frontend
-- Supabase-hosted PostgreSQL readiness
-- Render deployment readiness
+---
 
-## Technology stack
+## Technology Stack
 
 | Layer | Technology |
 |---|---|
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Backend | Node.js, Express.js |
-| Database | PostgreSQL / Supabase |
-| DB driver | pg |
+| Database | PostgreSQL, Supabase |
+| Database Driver | pg |
 | Configuration | dotenv |
-| Password security | bcrypt |
-| API testing | Postman |
-| Version control | GitHub |
-| Deployment | Render |
-| Diagrams | draw.io (optional) |
+| Password Security | bcrypt |
+| Containerisation | Docker |
+| Container Orchestration | Docker Compose |
+| Load Balancing | Nginx |
+| Performance Testing | Autocannon |
+| Container Security | Trivy |
+| Version Control | Git, GitHub |
+| Cloud Hosting | Render |
 
-## Architecture
+---
+
+## Application Architecture
+
+### Original Application Architecture
 
 ```text
 User Browser
-    ↓
+     |
+     v
 HTML + CSS + Vanilla JavaScript
-    ↓ REST / JSON
-Node.js + Express.js
-    ↓ parameterized SQL
-PostgreSQL
-    ↓
-Supabase Cloud PostgreSQL
+     |
+     | REST / JSON
+     v
+Node.js + Express.js Backend
+     |
+     | Parameterised SQL
+     v
+Supabase PostgreSQL Database
 ```
 
-For cloud deployment:
+### DA3 – Docker Scaling Architecture
+
+The local DA3 scaling implementation uses Docker Compose to run three backend instances behind an Nginx load balancer.
 
 ```text
-User Browser → Render Web Service → Node.js/Express → Supabase PostgreSQL
+                   User / Client
+                         |
+                         v
+                   Nginx Load Balancer
+                      Port 8080
+                         |
+             Docker Compose Network
+                         |
+             +-----------+-----------+
+             |           |           |
+             v           v           v
+          API 1       API 2       API 3
+         Port 3000   Port 3000   Port 3000
+             |           |           |
+             +-----------+-----------+
+                         |
+                         v
+                Supabase PostgreSQL
+                    Cloud Database
 ```
 
-See `docs/ARCHITECTURE.md` for the college-project explanation.
+Nginx distributes incoming requests across the three backend instances. All instances connect to the existing Supabase PostgreSQL database.
+
+**Note:** The three-instance Docker Compose setup is the local scaling implementation demonstrated for DA3. It should not be confused with the separate Render deployment of the original application.
+
+### Proposed Cloud-Bursting Architecture
+
+Cloud bursting is discussed as a proposed extension for handling demand beyond the capacity of the primary deployment. It is an architectural proposal and is not claimed as a deployed feature.
+
+---
 
 ## Database
 
-WasteNot uses exactly four application tables:
+WasteNot uses four main application tables:
 
-1. `users` — registered users
-2. `surplus_food` — all food listings
-3. `claims` — successful claim/redistribution records
-4. `organizations` — registered NGOs/organizations
+1. `users` – Stores registered user information.
+2. `surplus_food` – Stores food listings and their availability.
+3. `claims` – Stores successful claim and redistribution records.
+4. `organizations` – Stores registered organisation information.
 
-See `database/schema.sql` and `docs/DATABASE_DESIGN.md`.
+Database files:
 
-## API overview
+- `database/schema.sql`
+- `database/seed.sql`
 
-- `GET /api/health`
-- `POST /api/users`
-- `POST /api/users/login`
-- `GET /api/users`
-- `GET /api/users/:id`
-- `POST /api/surplus`
-- `GET /api/surplus`
-- `GET /api/surplus/:id`
-- `PUT /api/surplus/:id`
-- `DELETE /api/surplus/:id`
-- `POST /api/claims`
-- `GET /api/claims`
-- `GET /api/claims/:id`
-- `GET /api/organizations`
-- `GET /api/organizations/:id`
-- `GET /api/dashboard`
+Refer to `docs/DATABASE_DESIGN.md` for the database design.
 
-Authenticated endpoints require `Authorization: Bearer <token>` after login.
+---
 
-## Local setup
+## API Overview
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/health` | Health check |
+| POST | `/api/users` | User registration |
+| POST | `/api/users/login` | User login |
+| GET | `/api/users` | Retrieve users |
+| GET | `/api/users/:id` | Retrieve a user |
+| POST | `/api/surplus` | Create a food listing |
+| GET | `/api/surplus` | Retrieve food listings |
+| GET | `/api/surplus/:id` | Retrieve a specific listing |
+| PUT | `/api/surplus/:id` | Update a food listing |
+| DELETE | `/api/surplus/:id` | Delete a food listing |
+| POST | `/api/claims` | Create a claim |
+| GET | `/api/claims` | Retrieve claims |
+| GET | `/api/claims/:id` | Retrieve a specific claim |
+| GET | `/api/organizations` | Retrieve organisations |
+| GET | `/api/organizations/:id` | Retrieve an organisation |
+| GET | `/api/dashboard` | Retrieve dashboard statistics |
+
+Authenticated endpoints require the appropriate authentication credentials. Protected operations must also satisfy the relevant authorisation and ownership checks.
+
+Refer to `docs/API_DOCUMENTATION.md` for further details.
+
+---
+
+## Local Setup
 
 ### 1. Prerequisites
 
@@ -120,146 +229,220 @@ Install:
 
 - Node.js 18 or later
 - npm
-- A PostgreSQL database (local PostgreSQL or Supabase)
+- PostgreSQL or a Supabase project
 
-### 2. Install dependencies
+For the DA3 Docker scaling implementation, Docker Desktop and Docker Compose are also required.
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/divyakeerthana76-cse/WASTE_NOT.git
+cd WASTE_NOT
+```
+
+To access the DA3 implementation:
+
+```bash
+git checkout assignment-3
+```
+
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Create environment configuration
+### 4. Configure Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values:
+Create a `.env` file using `.env.example` as a reference.
 
 ```env
 DATABASE_URL=your-postgresql-connection-string
 PORT=3000
 AUTH_SECRET=your-long-random-secret
-DB_SSL=false
+DB_SSL=true
 ```
 
-Never commit `.env`.
+Use the appropriate database SSL setting for your PostgreSQL provider.
 
-### 4. Initialize the database
+**Never commit `.env` or expose database passwords, authentication secrets, or API keys.**
 
-Run the contents of `database/schema.sql` first. Then run `database/seed.sql`.
+### 5. Initialise the Database
 
-For a local PostgreSQL installation you can use `psql`:
+Run the SQL files in the following order:
 
-```bash
-psql "YOUR_DATABASE_URL" -f database/schema.sql
-psql "YOUR_DATABASE_URL" -f database/seed.sql
-```
+1. `database/schema.sql`
+2. `database/seed.sql`
 
-Or paste each SQL file into the PostgreSQL/Supabase SQL editor.
+These can be executed using the PostgreSQL command line or the Supabase SQL Editor.
 
-### 5. Start the application
+### 6. Start the Application
 
 ```bash
 npm start
 ```
 
-Open `http://localhost:3000` in your browser.
-
-### Demo account
-
-The seed file contains fictional demo users. Their password is:
-
-`demo123`
-
-Example:
-
-`divya@wastenot.demo`
-
-## Environment variables
-
-- `DATABASE_URL` — PostgreSQL/Supabase connection string
-- `PORT` — Render supplies this automatically in deployment; locally 3000 is fine
-- `AUTH_SECRET` — long random secret used to sign lightweight login tokens
-- `DB_SSL` — set to `true` when the database provider requires SSL (recommended for Supabase)
-
-## Supabase setup
-
-1. Create a Supabase project.
-2. Open the project's SQL Editor.
-3. Run `database/schema.sql`.
-4. Run `database/seed.sql`.
-5. Obtain the PostgreSQL connection string from the Supabase database connection settings.
-6. Prefer the provider's connection/pooler option suitable for your deployment environment.
-7. Put the connection string into `DATABASE_URL`.
-8. Set `DB_SSL=true` if required by the selected Supabase connection.
-9. Start the application and check `GET /api/health`.
-
-Do not put the Supabase password into source code, SQL files, or GitHub.
-
-## Render deployment
-
-1. Push the complete `WasteNot` folder to a GitHub repository.
-2. Create a new **Web Service** on Render and connect the repository.
-3. Runtime: Node.
-4. Build command: `npm install`.
-5. Start command: `npm start`.
-6. Add these Render environment variables:
-   - `DATABASE_URL` = your Supabase PostgreSQL connection string
-   - `AUTH_SECRET` = a strong random secret
-   - `DB_SSL` = `true` if required by your Supabase connection
-7. Deploy.
-8. Test the generated Render URL by opening the site and calling `/api/health`.
-
-The project is **deployment-ready**, but this repository does not claim that a deployment has already been performed.
-
-## Project structure
+Open:
 
 ```text
-WasteNot/
+http://localhost:3000
+```
+
+Test the health endpoint:
+
+```text
+http://localhost:3000/api/health
+```
+
+---
+
+## DA3 – Docker Scaling Setup
+
+The DA3 Docker Compose configuration runs three backend instances behind Nginx.
+
+From the project root, start the services using:
+
+```bash
+docker compose up -d --build
+```
+
+Check the running containers:
+
+```bash
+docker compose ps
+```
+
+View logs:
+
+```bash
+docker compose logs
+```
+
+Access the application through the Nginx load balancer:
+
+```text
+http://localhost:8080
+```
+
+Stop the containers:
+
+```bash
+docker compose down
+```
+
+The Docker Compose configuration and Nginx configuration in the repository define the actual service setup.
+
+---
+
+## Security Implementation
+
+### Password Security
+
+Passwords are stored as bcrypt hashes rather than plaintext passwords. The implementation uses password hashing and verification functions.
+
+### Multi-Factor Authentication
+
+TOTP-based MFA adds a verification step during login. Users must complete the additional verification challenge when MFA is enabled.
+
+### Role-Based Access Control
+
+RBAC restricts protected operations according to the authenticated user's role and applicable permissions. Update and Delete operations are checked against the relevant authorisation rules.
+
+### Container Security
+
+The Docker image is hardened and scanned using Trivy to identify vulnerabilities. Before-and-after scan evidence is available in `DA3/Q2_Security/`.
+
+---
+
+## Testing
+
+The project uses the following testing approaches:
+
+- API health checks.
+- Database connectivity checks.
+- Docker container status and log inspection.
+- Request distribution testing through Nginx.
+- Autocannon performance testing.
+- Backend failure and Nginx retry testing.
+- MFA login and invalid-code testing.
+- RBAC authorisation testing.
+- Trivy container vulnerability scanning.
+
+Refer to the DA3 evidence folders for the corresponding screenshots.
+
+---
+
+## Deployment
+
+The original WasteNot application has a Render deployment:
+
+[WasteNot – Live Application](https://waste-not-1.onrender.com)
+
+The application uses Supabase PostgreSQL as its cloud database.
+
+The DA3 three-instance Docker Compose setup is a separate local scaling demonstration. It should not be interpreted as a three-instance production deployment on Render.
+
+---
+
+## Project Structure
+
+```text
+WASTE_NOT/
+│
 ├── server.js
 ├── package.json
-├── package-lock.json              # created by npm install
+├── package-lock.json
 ├── .env.example
 ├── .gitignore
 ├── README.md
+│
 ├── database/
 │   ├── schema.sql
 │   └── seed.sql
+│
 ├── routes/
 │   ├── users.js
 │   ├── surplus.js
 │   ├── claims.js
 │   ├── organizations.js
 │   └── dashboard.js
+│
 ├── public/
 │   ├── index.html
 │   ├── style.css
 │   └── script.js
-└── docs/
-    ├── API_DOCUMENTATION.md
-    ├── DATABASE_DESIGN.md
-    ├── ARCHITECTURE.md
-    └── TESTING.md
+│
+├── docs/
+│   ├── API_DOCUMENTATION.md
+│   ├── DATABASE_DESIGN.md
+│   ├── ARCHITECTURE.md
+│   └── TESTING.md
+│
+└── DA3/
+    ├── Q1_Scaling/
+    └── Q2_Security/
 ```
 
-## Testing
+---
 
-Use Postman against `http://localhost:3000` locally or your Render URL after deployment. Follow `docs/TESTING.md`.
+## Future Improvements
 
-## Future improvements
+- Enhanced organisation account management.
+- Email notifications.
+- Admin moderation.
+- Partial quantity allocation for multiple claims.
+- Improved locality normalisation.
+- Audit logging.
+- Further cloud scaling and automated monitoring.
 
-- Role-based organization accounts
-- Email notifications
-- Admin moderation
-- Partial quantity allocation with multiple claims
-- Better locality normalization
-- Audit logging
+---
 
-These are intentionally outside the current scope so the four-table student architecture remains understandable.
+## Repository
 
-## Manual configuration still required
+**GitHub Repository:**  
+https://github.com/divyakeerthana76-cse/WASTE_NOT
 
-1. Install Node.js/npm if not already installed.
-2. Create a PostgreSQL database or Supabase project.
-3. Run `database/schema.sql` and `database/seed.sql`.
-4. Create `.env` from `.env.example` and add the database URL and authentication secret.
-5. Run `npm install` and `npm start`.
-6. If deploying, create the GitHub repository and Render Web Service, then add the environment variables.
-7. Test the deployed service before stating that deployment is complete.
+**DA3 Submission Branch:**  
+https://github.com/divyakeerthana76-cse/WASTE_NOT/tree/assignment-3
+
+The `assignment-3` branch contains the DA3 implementation and its supporting evidence screenshots.
