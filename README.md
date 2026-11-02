@@ -2,6 +2,29 @@
 
 WasteNot is a full-stack Cloud Computing project that helps people redistribute safe edible surplus food instead of wasting it. A user can publish surplus food, another user can claim it for personal use, or it can be redistributed to a registered organization in the same stored locality.
 
+
+# 🚀 DIGITAL ASSIGNMENT 3 – CLOUD INFRASTRUCTURE & SECURITY
+
+This repository includes the implementation of **Digital Assignment 3 (DA3)** for the WasteNot – Food Surplus Redistribution Platform.
+
+### DA3 – Implementation Highlights
+
+- **Q1 – Cloud Scaling:** Docker-based deployment with three backend instances and Nginx load balancing.
+- **Q1 – Performance Testing:** Load testing, request distribution and failure recovery.
+- **Q2(a) – Password Security:** bcrypt password hashing.
+- **Q2(b) – Authentication & Authorization:** Multi-Factor Authentication (MFA) and Role-Based Access Control (RBAC).
+- **Q2(c) – Container Security:** Docker image hardening and Trivy vulnerability scanning.
+
+### 📂 DA3 Submission Links
+
+| Resource | Link |
+|---|---|
+| DA3 Source Code | [Open assignment-3 branch](https://github.com/divyakeerthana76-cse/WASTE_NOT/tree/assignment-3) |
+| Evidence Screenshots | [View Q1 & Q2 Evidence](https://github.com/divyakeerthana76-cse/WASTE_NOT/tree/assignment-3/docs/evidence) |
+
+---
+
+
 ## Features
 
 - User registration, login and logout
